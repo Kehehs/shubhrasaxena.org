@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>It Matters A Lot. — The Book — Shubhra Saxena</title>
+<meta name="description" content="It Matters A Lot. A book about the question we all asked once as children, and quietly stopped asking out loud. By Shubhra Saxena.">
+<link rel="icon" type="image/webp" href="ss-favicon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dawn:#F8F4ED;
+    --cloud:#FFFDF9;
+    --ink:#2B2733;
+    --ink-deep:#1e1c25;
+    --ink-soft:#56505f;
+    --marigold:#E6A23C;
+    --marigold-soft:#F0BE6E;
+    --rose:#C98A74;
+    --sky:#9DB0C2;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost','Helvetica Neue',Arial,sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans);
+    background:var(--dawn);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 36px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important;transition:none!important;}
+  }
+
+  a:focus-visible,button:focus-visible,input:focus-visible{
+    outline:2px solid var(--marigold);outline-offset:3px;
+  }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;width:fit-content;
+    font-family:var(--sans);font-weight:500;
+    font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:14px 28px;border-radius:999px;border:none;cursor:pointer;
+    text-decoration:none;
+    transition:background .2s ease, transform .2s ease, border-color .2s ease;
+  }
+  .btn-primary{background:var(--marigold);color:var(--ink);}
+  .btn-primary:hover{background:var(--marigold-soft);transform:translateY(-2px);}
+  .btn-ghost{background:transparent;color:var(--cloud);border:1.5px solid rgba(255,253,249,.3);}
+  .btn-ghost:hover{border-color:rgba(255,253,249,.7);}
+
+  /* ---------- nav ---------- */
+  /* Transparent + reversed colour while it overlays the Twilight Ink hero; solidifies to the
+     standard Dawn nav once the page has scrolled past the hero. Toggled via .nav-on-dark /
+     .nav-solid in the scroll handler below. */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:transparent;
+    border-bottom:1px solid transparent;
+    transition:background .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .nav.nav-solid{
+    background:var(--dawn);
+    border-bottom:1px solid rgba(43,39,51,.08);
+  }
+  .nav.nav-solid.scrolled{box-shadow:0 2px 16px rgba(43,39,51,.06);}
+  .nav-inner{
+    max-width:1080px;margin:0 auto;padding:0 36px;
+    display:flex;align-items:center;justify-content:space-between;
+    height:76px;
+  }
+  .nav-logo{display:flex;flex-direction:column;align-items:center;justify-content:center;height:48px;gap:5px;}
+  .nav-logo-icon{width:22px;}
+  .nav-wordmark{
+    font-family:var(--serif);font-weight:600;font-size:.66rem;
+    letter-spacing:.04em;color:var(--ink);text-transform:uppercase;white-space:nowrap;
+    transition:color .3s ease;
+  }
+  .nav.nav-on-dark .nav-wordmark{color:var(--cloud);}
+  .nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+  .nav-links a{
+    font-family:var(--sans);font-weight:500;font-size:.78rem;
+    text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);
+    position:relative;padding-bottom:4px;
+    transition:color .3s ease;
+  }
+  .nav.nav-on-dark .nav-links a{color:rgba(255,253,249,.85);}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;right:0;bottom:-4px;height:1.5px;
+    background:var(--marigold);transform:scaleX(0);transform-origin:left;
+    transition:transform .2s ease;
+  }
+  .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+  .nav-toggle span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0;transition:transform .2s ease, opacity .2s ease, background .3s ease;}
+  .nav.nav-on-dark .nav-toggle span{background:var(--cloud);}
+
+  .mobile-drawer{
+    display:none;position:fixed;top:76px;left:0;right:0;bottom:0;
+    background:var(--dawn);z-index:99;padding:20px 36px 40px;
+    transform:translateY(-8px);opacity:0;pointer-events:none;
+    transition:transform .22s ease, opacity .22s ease;
+  }
+  .mobile-drawer.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .mobile-drawer a{
+    display:block;font-family:var(--sans);font-weight:500;font-size:1.05rem;
+    text-transform:uppercase;letter-spacing:.14em;color:var(--ink);
+    padding:18px 0;border-bottom:1px solid rgba(43,39,51,.08);
+  }
+
+  @media (max-width:768px){
+    .nav-links{display:none;}
+    .nav-toggle{display:block;}
+    .mobile-drawer{display:block;}
+  }
+
+  /* ---------- diya icon ---------- */
+  .diya{
+    display:inline-block;background-color:var(--marigold);
+    -webkit-mask-image:url('LOGOS/icon-diya.webp');mask-image:url('LOGOS/icon-diya.webp');
+    -webkit-mask-size:contain;mask-size:contain;
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-position:center;mask-position:center;
+    aspect-ratio:450/682;height:auto;
+  }
+  .diya-cloud{background-color:var(--cloud);}
+
+  /* ---------- section divider ---------- */
+  .divider{display:flex;justify-content:center;background:var(--dawn);}
+  .divider .diya{width:28px;height:auto;margin-top:64px;margin-bottom:64px;}
+  .divider-on-cloud{background:var(--cloud);}
+
+  /* ---------- fade-up entrance ---------- */
+  .hero-anim{
+    opacity:0;transform:translateY(24px);
+    animation:heroFadeUp .6s cubic-bezier(.25,.1,.25,1) forwards;
+    animation-delay:calc(.25s + (var(--d, 0) * .18s));
+  }
+  @keyframes heroFadeUp{to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion:reduce){
+    .hero-anim{opacity:1;transform:none;animation:none;}
+  }
+
+  /* ---------- Section 1: Book Hero (dark, inverted) ---------- */
+  /* The nav overlays this section transparently (see .nav-on-dark above), so the hero itself
+     reserves the top clearance rather than being pushed down by nav flow height. */
+  .book-hero{
+    min-height:100vh;padding-top:96px;padding-bottom:40px;box-sizing:border-box;
+    display:flex;align-items:center;
+    background:var(--ink);position:relative;overflow:hidden;
+  }
+  .book-hero-grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,253,249,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,253,249,.04) 1px, transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image:radial-gradient(ellipse at 68% 50%, black 0%, transparent 68%);
+    mask-image:radial-gradient(ellipse at 68% 50%, black 0%, transparent 68%);
+  }
+  .book-hero-glow{
+    position:absolute;inset:0;
+    background:radial-gradient(circle at 72% 50%, rgba(230,162,60,.14), transparent 60%);
+  }
+  .book-hero-inner{
+    position:relative;z-index:1;display:flex;align-items:center;gap:clamp(64px,7vw,120px);
+    width:100%;
+  }
+  .book-hero-text{width:48%;max-width:480px;}
+  .book-hero-eyebrow-row{display:flex;align-items:center;gap:16px;margin-bottom:30px;}
+  .book-hero-eyebrow{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;
+    text-transform:uppercase;letter-spacing:.3em;color:var(--marigold);
+  }
+  .book-hero-badge{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;text-transform:uppercase;
+    color:var(--ink);background:var(--marigold);border-radius:999px;padding:5px 14px;
+  }
+  .book-hero-title{
+    font-family:var(--serif);font-weight:700;
+    font-size:clamp(2.8rem,5.2vw,4.6rem);line-height:1.02;
+    color:var(--cloud);max-width:12ch;margin-bottom:22px;
+  }
+  .book-hero-title .it{font-style:italic;font-weight:500;color:var(--marigold-soft);}
+  .book-hero-author{
+    font-family:var(--sans);font-weight:400;font-size:.88rem;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--rose);
+    margin-bottom:24px;
+  }
+  .book-hero-rule{width:40px;height:1px;background:rgba(230,162,60,.6);margin-bottom:30px;}
+  .book-hero-pitch{
+    font-family:var(--serif);font-weight:400;font-style:italic;
+    font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.5;
+    color:rgba(255,253,249,.82);max-width:34ch;margin-bottom:44px;
+  }
+  .book-hero-ctas{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+  .book-hero-secondary{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;
+    color:rgba(255,253,249,.72);transition:color .2s ease;
+  }
+  .book-hero-secondary:hover{color:var(--marigold-soft);}
+
+  .book-hero-media{
+    width:52%;display:flex;justify-content:center;align-items:center;position:relative;
+  }
+  .book-cover-wrap{position:relative;width:300px;height:410px;}
+  .book-cover{
+    position:relative;width:300px;height:410px;background:var(--cloud);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 32px 80px rgba(0,0,0,.40), 0 6px 16px rgba(0,0,0,.22);
+    transform:rotate(4deg);
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .book-cover img{width:100%;height:100%;object-fit:cover;display:block;}
+  .book-cover-wrap:hover .book-cover{transform:translateY(-10px) rotate(2deg);}
+  .book-cover-plate{
+    position:absolute;top:0;left:0;width:300px;height:410px;
+    background:rgba(230,162,60,.14);
+    border-radius:4px 12px 12px 4px;
+    transform:rotate(-6deg) translate(38px,20px);
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .book-cover-wrap:hover .book-cover-plate{transform:translateY(-4px) rotate(-8deg) translate(38px,20px);}
+  .book-cover-diya{width:84px;height:auto;}
+  .book-cover-title{
+    font-family:var(--serif);font-weight:700;font-size:1.4rem;letter-spacing:.04em;
+    color:var(--ink);text-align:center;
+  }
+  .book-cover-author{
+    font-family:var(--sans);font-weight:400;font-size:.8rem;text-transform:uppercase;
+    letter-spacing:.14em;color:var(--ink-soft);
+  }
+  .book-cover-badge{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;color:var(--cloud);
+    background:var(--marigold);border-radius:999px;padding:4px 12px;
+    position:absolute;top:16px;right:16px;z-index:2;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+  }
+  @media (prefers-reduced-motion:reduce){
+    .book-cover,.book-cover-plate{transform:none!important;}
+  }
+  @media (max-width:1079px) and (min-width:769px){
+    .book-hero-text{width:50%;max-width:none;}
+    .book-hero-media{width:50%;}
+  }
+  @media (max-width:768px){
+    .book-hero{min-height:auto;padding-top:104px;padding-bottom:48px;}
+    .book-hero-grid{display:none;}
+    .book-hero-inner{flex-direction:column-reverse;gap:40px;}
+    .book-hero-text,.book-hero-media{width:100%;max-width:none;}
+    .book-hero-text{text-align:center;align-items:center;display:flex;flex-direction:column;}
+    .book-hero-eyebrow-row{justify-content:center;}
+    .book-hero-title{max-width:none;}
+    .book-hero-pitch{max-width:none;}
+    .book-hero-ctas{flex-direction:column;width:100%;gap:12px;}
+    .book-hero-ctas .btn{width:100%;justify-content:center;}
+    .book-cover-wrap,.book-cover,.book-cover-plate{width:240px;height:328px;}
+    .book-cover{transform:rotate(2deg);}
+    .book-cover-plate{transform:rotate(-4deg) translate(14px,7px);}
+    .book-cover-diya{width:64px;}
+  }
+
+  /* ---------- Section 2: Synopsis ---------- */
+  .synopsis{background:var(--dawn);padding:56px 0 88px;scroll-margin-top:76px;}
+  .synopsis .wrap{max-width:680px;}
+  .synopsis-eyebrow{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;text-transform:uppercase;
+    letter-spacing:.3em;color:var(--rose);text-align:center;margin-bottom:20px;
+  }
+  .synopsis-heading{
+    font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3vw,2.2rem);
+    color:var(--ink);text-align:center;margin-bottom:40px;
+  }
+  .beat{
+    position:relative;padding-left:24px;margin-bottom:48px;
+    opacity:0;transform:translateY(16px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .beat::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+    background:rgba(230,162,60,.45);
+  }
+  .beat:last-of-type{margin-bottom:0;}
+  .beat.in-view{opacity:1;transform:translateY(0);}
+  .beat-label{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;text-transform:uppercase;
+    letter-spacing:.2em;color:var(--rose);margin-bottom:12px;
+  }
+  .beat-copy{
+    font-family:var(--sans);font-weight:400;font-size:1rem;line-height:1.75;color:var(--ink-soft);
+  }
+  .beat-copy .lede{
+    font-family:var(--serif);font-weight:500;font-style:italic;font-size:1.15rem;color:var(--ink);
+  }
+  .beat-copy em{
+    font-family:var(--serif);font-style:italic;color:var(--ink);
+  }
+  .beat-copy .quad-line{
+    display:block;font-family:var(--serif);font-weight:500;font-style:italic;font-size:1.15rem;
+    color:var(--ink);margin:12px 0;
+  }
+  .pull-line{
+    font-family:var(--serif);font-weight:400;font-style:italic;
+    font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.4;color:var(--ink);
+    text-align:center;margin:56px 0;
+    opacity:0;transition:opacity .6s ease;
+  }
+  .pull-line.in-view{opacity:1;}
+  .closing-line{
+    font-family:var(--serif);font-weight:500;font-style:italic;
+    font-size:clamp(1.3rem,2.6vw,1.8rem);line-height:1.4;color:var(--ink);
+    text-align:center;margin-top:40px;
+    opacity:0;transition:opacity .6s ease;
+  }
+  .closing-line.in-view{opacity:1;}
+  @media (prefers-reduced-motion:reduce){
+    .beat,.pull-line,.closing-line{opacity:1;transform:none;transition:none;}
+  }
+  @media (max-width:480px){
+    .beat{padding-left:16px;}
+    .beat::before{width:1px;}
+  }
+
+  /* ---------- Section 3: Inside the Book ---------- */
+  .inside-book{background:var(--cloud);padding:88px 0;}
+  .inside-book-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .inside-book-eyebrow{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;text-transform:uppercase;
+    letter-spacing:.3em;color:var(--rose);margin-bottom:18px;
+  }
+  .inside-book-heading{
+    font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3vw,2.2rem);
+    color:var(--ink);margin-bottom:16px;
+  }
+  .inside-book-sub{
+    font-family:var(--sans);font-weight:400;font-size:.9rem;line-height:1.65;
+    color:var(--ink-soft);max-width:52ch;margin:0 auto;
+  }
+  .stage-subheading{
+    font-family:var(--serif);font-weight:600;font-size:1.15rem;
+    color:var(--ink);text-align:center;margin:28px auto 40px;
+  }
+  .stage-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  }
+  .stage-card{
+    background:var(--cloud);border:1px solid rgba(43,39,51,.08);border-radius:16px;
+    padding:28px;min-height:200px;display:flex;flex-direction:column;
+    align-items:center;text-align:center;justify-content:flex-start;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .stage-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(43,39,51,.10);}
+  .stage-label{
+    font-family:var(--sans);font-weight:500;font-size:.7rem;text-transform:uppercase;
+    letter-spacing:.12em;color:var(--marigold);white-space:nowrap;
+  }
+  .stage-rule{width:24px;height:1px;background:rgba(230,162,60,.4);margin:14px auto;}
+  .stage-question{
+    font-family:var(--serif);font-weight:500;font-style:italic;font-size:1.15rem;
+    line-height:1.4;color:var(--ink);
+  }
+  @media (max-width:1079px){
+    .stage-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:768px){
+    .stage-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Section 4: Excerpt ---------- */
+  .excerpt{background:var(--ink);padding:96px 0;}
+  .excerpt .wrap{max-width:780px;text-align:center;}
+  .excerpt .diya{width:32px;margin:0 auto 28px;}
+  .excerpt-eyebrow{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;text-transform:uppercase;
+    letter-spacing:.3em;color:rgba(230,162,60,.7);margin-bottom:24px;
+  }
+  .excerpt-quote{
+    font-family:var(--serif);font-weight:400;font-style:italic;
+    font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.4;color:var(--dawn);
+  }
+  .excerpt-attr{
+    font-family:var(--sans);font-weight:400;font-size:.76rem;text-transform:uppercase;
+    letter-spacing:.16em;color:var(--rose);margin-top:24px;font-style:normal;
+  }
+
+  /* ---------- Section 6: Notify Band ---------- */
+  .notify-band{background:var(--dawn);padding:56px 0 80px;text-align:center;}
+  .notify-band .wrap{max-width:620px;}
+  .notify-heading{
+    font-family:var(--serif);font-weight:600;font-size:clamp(1.5rem,2.8vw,2rem);color:var(--ink);
+  }
+  .notify-body{
+    font-family:var(--sans);font-weight:400;font-size:.92rem;line-height:1.7;
+    color:var(--ink-soft);max-width:48ch;margin:16px auto 0;
+  }
+  .notify-band .btn{margin-top:32px;}
+
+  /* ---------- Section 5: Author (feature panel) ---------- */
+  /* Adapted from the supplied Feature component: media panel + badge/heading/body/link,
+     re-skinned to First Light tokens. Media at 4:5 (not 16:9 — she is a person at a podium,
+     not panelling), marigold depth plate behind it, same device as the hero book cover. */
+  .author-feature{background:var(--dawn);padding:96px 0 56px;}
+  @media (min-width:1024px){.author-feature{padding:128px 0 72px;}}
+  .author-feature-inner{
+    display:flex;flex-direction:column-reverse;gap:48px;
+  }
+  @media (min-width:1024px){
+    .author-feature-inner{flex-direction:row;align-items:center;gap:80px;}
+  }
+  .author-feature-media{position:relative;width:100%;flex:1;}
+  .author-feature-frame{
+    position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;border-radius:16px;
+  }
+  .author-feature-frame img{width:100%;height:100%;object-fit:cover;}
+  .author-feature-plate{
+    position:absolute;bottom:-16px;left:-16px;z-index:-1;
+    width:100%;height:100%;border-radius:16px;background:rgba(230,162,60,.14);
+  }
+  .author-feature-text{display:flex;flex-direction:column;gap:24px;flex:1;}
+  .author-feature-badge{
+    width:fit-content;border-radius:999px;padding:6px 14px;
+    font-family:var(--sans);font-weight:500;font-size:.8rem;text-transform:uppercase;
+    letter-spacing:.2em;background:rgba(230,162,60,.14);color:var(--marigold);
+  }
+  .author-feature-body{display:flex;flex-direction:column;gap:20px;}
+  .author-feature-name{
+    font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,4vw,3.2rem);
+    line-height:1.08;letter-spacing:-.02em;color:var(--ink);
+  }
+  .author-feature-bio{
+    max-width:36em;font-family:var(--sans);font-weight:400;font-size:1.02rem;
+    line-height:1.8;color:var(--ink-soft);
+  }
+  .author-feature-link{
+    width:fit-content;font-family:var(--sans);font-weight:500;font-size:.88rem;
+    color:var(--marigold);transition:color .2s ease;
+  }
+  .author-feature-link:hover{color:var(--marigold-soft);}
+  @media (max-width:1023px) and (min-width:640px){
+    .author-feature-frame{max-width:420px;margin:0 auto;}
+  }
+
+  /* ---------- footer ---------- */
+  .site-footer{background:var(--ink-deep);color:var(--cloud);padding:56px 0;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;align-items:start;}
+  .footer-logo{display:block;}
+  .footer-logo-icon{width:32px;}
+  .footer-wordmark{
+    font-family:var(--serif);font-weight:600;font-size:1.05rem;
+    letter-spacing:.08em;color:var(--cloud);text-transform:uppercase;margin-top:10px;
+  }
+  .footer-tagline{font-family:var(--serif);font-weight:400;font-style:italic;font-size:.95rem;color:rgba(255,253,249,.7);margin-top:14px;}
+  .footer-label{
+    font-family:var(--sans);font-weight:500;font-size:.66rem;text-transform:uppercase;
+    letter-spacing:.2em;color:var(--marigold);margin-bottom:16px;
+  }
+  .footer-links a{
+    display:block;font-family:var(--sans);font-weight:400;font-size:.88rem;
+    color:rgba(255,253,249,.75);margin-bottom:10px;transition:color .2s ease;
+  }
+  .footer-links a:hover{color:var(--cloud);}
+  .footer-social-link{
+    display:block;font-family:var(--sans);font-weight:400;font-size:.88rem;
+    color:rgba(255,253,249,.75);text-decoration:none;margin-bottom:10px;
+    transition:color .2s ease;
+  }
+  .footer-social-link:hover{color:var(--marigold);}
+  .footer-connect-note{
+    font-family:var(--sans);font-weight:400;font-size:.78rem;
+    color:rgba(255,253,249,.40);margin-top:14px;line-height:1.6;
+  }
+  .footer-base{
+    border-top:1px solid rgba(255,253,249,.08);margin-top:48px;padding-top:20px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--sans);font-weight:400;font-size:.72rem;color:rgba(255,253,249,.4);
+  }
+  .footer-base a{color:rgba(255,253,249,.4);}
+  @media (max-width:768px){
+    .footer-grid{grid-template-columns:1fr;gap:32px;}
+    .footer-base{flex-direction:column;gap:8px;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav nav-on-dark" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Shubhra Saxena — Home">
+      <span class="diya nav-logo-icon" aria-hidden="true"></span>
+      <p class="nav-wordmark">Shubhra Saxena</p>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="book.html" class="active">Book</a></li>
+      <li style="display:none"><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="book.html">Book</a>
+    <a href="blog.html" style="display:none">Blog</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- Section 1 — Hero -->
+<header class="book-hero">
+  <div class="book-hero-grid" aria-hidden="true"></div>
+  <div class="book-hero-glow" aria-hidden="true"></div>
+  <div class="wrap book-hero-inner">
+    <div class="book-hero-text">
+      <div class="book-hero-eyebrow-row hero-anim" style="--d:0">
+        <p class="book-hero-eyebrow">The Book</p>
+        <span class="book-hero-badge">Coming Soon</span>
+      </div>
+      <h1 class="book-hero-title hero-anim" style="--d:1">It Matters <span class="it">A Lot.</span></h1>
+      <p class="book-hero-author hero-anim" style="--d:2">Shubhra Saxena</p>
+      <div class="book-hero-rule hero-anim" style="--d:2"></div>
+      <p class="book-hero-pitch hero-anim" style="--d:3">A book that stays with you like an old friend. Some pages will remind you of places you've already been. Some will meet you exactly where you are. And some will point toward where you're headed.</p>
+      <div class="book-hero-ctas hero-anim" style="--d:4">
+        <a href="contact.html#notify" class="btn btn-primary">Notify me →</a>
+        <a href="#synopsis" class="book-hero-secondary">Read the synopsis ↓</a>
+      </div>
+    </div>
+    <div class="book-hero-media">
+      <div class="book-cover-wrap" role="img" aria-label="It Matters A Lot by Shubhra Saxena, coming soon">
+        <div class="book-cover-plate" aria-hidden="true"></div>
+        <div class="book-cover">
+          <img src="Pages/Books%20Page/Images/IMAL-front-cover-web.webp?v=2" alt="Book cover: It Matters A Lot by Shubhra Saxena">
+          <span class="book-cover-badge">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Section 2 — Synopsis -->
+<section class="synopsis" id="synopsis">
+  <div class="wrap">
+    <p class="synopsis-eyebrow">What the Book Is About</p>
+    <h2 class="synopsis-heading">An invitation back to the question</h2>
+
+    <div class="beat">
+      <p class="beat-copy">Every life, at some early point, is interrupted by a single unanswerable question: why does any of this matter? Most of us set that question aside and spend the following decades in motion, building careers, families, and identities, without ever quite returning to it.</p>
+    </div>
+
+    <div class="beat">
+      <p class="beat-copy"><em>It Matters A Lot</em> is a work of literary nonfiction written in that return. It follows a complete human life, from childhood to old age, in search of what actually forms a person: not the milestones that mark a life from the outside, but the unexamined forces that shape it from within.</p>
+    </div>
+
+    <p class="pull-line">A single conviction runs beneath the entire book: that character is formed less by what a person accumulates than by what they notice, and by whether they remain capable of kindness along the way.</p>
+
+    <div class="beat">
+      <p class="beat-copy"><em>It Matters A Lot</em> will find its natural audience among readers of serious, spiritually engaged nonfiction. It does not aim to console. It aims to clarify, and its ultimate purpose is unadorned: to help readers see the life already in progress, recognise what matters, and respond to it while there is still time to do so.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="diya" aria-hidden="true"></span></div>
+
+<!-- Section 3 — Inside the Book -->
+<section class="inside-book">
+  <div class="wrap">
+    <div class="inside-book-head">
+      <p class="inside-book-eyebrow">Four Stages, Four Questions</p>
+      <h2 class="inside-book-heading">The book is built the way a life is</h2>
+      <p class="inside-book-sub">It Matters A Lot is not a book of answers. It is an invitation back to the question, the one you probably asked once too, before someone told you it was better to keep it quiet. Each chapter in this book sits with a different stage of life, childhood, adolescence, adulthood, old age, not to tell you how to live it, but to slow you down inside it.</p>
+    </div>
+    <p class="stage-subheading">The questions, as they appear in the book</p>
+    <div class="stage-grid">
+      <div class="stage-card">
+        <p class="stage-label">Childhood (Ch.1)</p>
+        <div class="stage-rule"></div>
+        <p class="stage-question">When and around whom did you learn to make yourself quieter?</p>
+      </div>
+      <div class="stage-card">
+        <p class="stage-label">Adolescence (Ch.4)</p>
+        <div class="stage-rule"></div>
+        <p class="stage-question">When a teenager close to you starts pulling away, is your first instinct to control them or to understand them?</p>
+      </div>
+      <div class="stage-card">
+        <p class="stage-label">Adulthood (Ch.13)</p>
+        <div class="stage-rule"></div>
+        <p class="stage-question">In which aspect of your life are you stretching yourself so thin that you no longer feel your own presence?</p>
+      </div>
+      <div class="stage-card">
+        <p class="stage-label">Old Age (Ch.19)</p>
+        <div class="stage-rule"></div>
+        <p class="stage-question">You know that your time is limited. Can you change the way you are living today?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4 — Excerpt -->
+<section class="excerpt">
+  <div class="wrap">
+    <span class="diya" aria-hidden="true"></span>
+    <p class="excerpt-eyebrow">From the Introduction</p>
+    <blockquote>
+      <p class="excerpt-quote">&ldquo;There is a difference between existing and truly living.&rdquo;</p>
+      <cite class="excerpt-attr">It Matters A Lot, Shubhra Saxena</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- Section 5 — Author (feature panel) -->
+<section class="author-feature">
+  <div class="wrap author-feature-inner">
+    <div class="author-feature-media">
+      <div class="author-feature-frame">
+        <img src="Pages/Home%20Page/Final%20Images/conference-2.webp" alt="Shubhra Saxena speaking on a panel at a democracy and elections conference">
+      </div>
+      <div class="author-feature-plate" aria-hidden="true"></div>
+    </div>
+    <div class="author-feature-text">
+      <span class="author-feature-badge">About the Author</span>
+      <div class="author-feature-body">
+        <h2 class="author-feature-name">Shubhra Saxena</h2>
+        <p class="author-feature-bio">Shubhra Saxena is an IAS officer (2009 batch, Uttar Pradesh cadre), with experience across governance, healthcare, education, disaster management, and electoral administration. Her years of public service, especially through the COVID-19 pandemic, deepened her interest in psychology, philosophy, and human behaviour, interests she now explores through 'It Matters A Lot', her writing, podcast, and public conversations on self-awareness, empathy, and conscious living.</p>
+        <a href="about.html" class="author-feature-link">→ Read her story</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 6 — Notify Band -->
+<section class="notify-band" id="notify">
+  <div class="wrap">
+    <h2 class="notify-heading">The book is not out yet</h2>
+    <p class="notify-body">The book is on its way into the world. When it has a date, a cover, and a place to buy it, this is where that will be announced first.</p>
+    <a href="contact.html#notify" class="btn btn-primary">Notify me →</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="footer-logo" aria-label="Shubhra Saxena — Home">
+          <span class="diya footer-logo-icon" aria-hidden="true"></span>
+          <p class="footer-wordmark">Shubhra Saxena</p>
+        </a>
+        <p class="footer-tagline">A life built around what matters.</p>
+      </div>
+      <div class="footer-links">
+        <p class="footer-label">Explore</p>
+        <a href="about.html">About</a>
+        <a href="book.html">Book</a>
+        <a href="blog.html" style="display:none">Blog</a>
+        <a href="contact.html">Connect</a>
+      </div>
+      <div class="footer-links footer-col3">
+        <p class="footer-label">Connect</p>
+        <a class="footer-social-link" href="https://www.linkedin.com/in/shubhra-saxena-ias-423564218?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="footer-social-link" href="https://www.instagram.com/shubhra.saxena_official?igsh=MTlkbDlzODBmdm40eQ==" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a class="footer-social-link" href="https://youtube.com/@itmattersalot-shubhrasaxena?si=4LmqFnFWcNlQ2Doa" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>&copy; Shubhra Saxena</span>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const heroEl = document.querySelector('.book-hero');
+  const navHeight = 76;
+  function updateNav() {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+    const heroBottom = heroEl.getBoundingClientRect().bottom;
+    const overHero = heroBottom > navHeight;
+    nav.classList.toggle('nav-on-dark', overHero);
+    nav.classList.toggle('nav-solid', !overHero);
+  }
+  updateNav();
+  window.addEventListener('scroll', updateNav);
+  window.addEventListener('resize', updateNav);
+  const toggle = document.getElementById('navToggle');
+  const drawer = document.getElementById('mobileDrawer');
+  toggle.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  const synopsisReveals = document.querySelectorAll('.synopsis .beat');
+  if ('IntersectionObserver' in window && synopsisReveals.length) {
+    const synopsisObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(synopsisReveals).indexOf(entry.target);
+          entry.target.style.transitionDelay = `${idx * 120}ms`;
+          entry.target.classList.add('in-view');
+          synopsisObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    synopsisReveals.forEach(el => synopsisObserver.observe(el));
+  } else {
+    synopsisReveals.forEach(el => el.classList.add('in-view'));
+  }
+
+  const pullLines = document.querySelectorAll('.synopsis .pull-line, .synopsis .closing-line');
+  if ('IntersectionObserver' in window && pullLines.length) {
+    const pullObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          pullObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    pullLines.forEach(el => pullObserver.observe(el));
+  } else {
+    pullLines.forEach(el => el.classList.add('in-view'));
+  }
+</script>
+
+</body>
+</html>

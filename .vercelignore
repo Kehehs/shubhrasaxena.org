@@ -1,0 +1,9 @@
+node_modules
+temporary screenshots
+Pages/Home Page/Raw Images
+package.json
+package-lock.json
+serve.mjs
+screenshot.mjs
+brand-theme-new.html
+.DS_Store
