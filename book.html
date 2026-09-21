@@ -23,6 +23,62 @@
 <meta property="og:image" content="https://www.shubhrasaxena.org/Pages/Books%20Page/Images/IMAL-front-cover-web.webp?v=3">
 <link rel="icon" type="image/webp" href="ss-favicon.webp">
 <link rel="stylesheet" href="fonts/fonts.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the book about?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It Matters A Lot is a work of literary nonfiction that follows a complete human life, from childhood to old age, in search of what actually forms a person. It is not a book of answers. It is an invitation back to the question: why does any of this matter?"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who wrote the foreword?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "His Holiness the Dalai Lama has written the foreword to It Matters A Lot. It opens the book before the first chapter begins."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is it for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It Matters A Lot is for everyone. The book follows a whole life, from childhood to old age, so every reader will find pages that meet them where they are. You do not need to be at any particular stage of life. You only need to have asked, at some point, why any of this matters."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it a self-help book?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It offers no method, steps or checklist. Each chapter sits with a stage of life and leaves you with a question to carry, not an instruction to follow."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I pre-order?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the Pre-Order Now button on this page. It takes you to the book's listing on Amazon India."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a pre-order discount?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The pre-order price on Amazon is discounted. The current price is shown on the listing."
+      }
+    }
+  ]
+}
+</script>
 <style>
   :root{
     --dawn:#F8F4ED;
@@ -465,6 +521,38 @@
     .author-feature-frame{max-width:420px;margin:0 auto;}
   }
 
+  /* ---------- Section 6: FAQ ---------- */
+  .faq{background:var(--cloud);padding:88px 0;}
+  .faq .wrap{max-width:700px;}
+  .faq-eyebrow{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;text-transform:uppercase;
+    letter-spacing:.3em;color:var(--rose);text-align:center;margin-bottom:18px;
+  }
+  .faq-heading{
+    font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3vw,2.2rem);
+    color:var(--ink);text-align:center;margin-bottom:40px;
+  }
+  .faq-list{border-top:1px solid rgba(43,39,51,.08);}
+  .faq-item{border-bottom:1px solid rgba(43,39,51,.08);}
+  .faq-item summary{
+    list-style:none;cursor:pointer;position:relative;
+    display:flex;align-items:center;min-height:44px;
+    padding:16px 40px 16px 0;
+    font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--ink);
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:'+';position:absolute;right:4px;top:50%;transform:translateY(-50%);
+    font-family:var(--sans);font-size:1.2rem;color:var(--marigold);
+  }
+  .faq-item[open] summary::after{content:'\2212';}
+  .faq-item summary:focus-visible{outline:2px solid var(--marigold);outline-offset:3px;}
+  .faq-answer{padding:0 40px 20px 0;}
+  .faq-answer p{
+    font-family:var(--sans);font-weight:400;font-size:.95rem;line-height:1.75;color:var(--ink-soft);
+  }
+  .faq-answer em{font-family:var(--serif);font-style:italic;color:var(--ink);}
+
   /* ---------- footer ---------- */
   .site-footer{background:var(--ink-deep);color:var(--cloud);padding:56px 0;}
   .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;align-items:start;}
@@ -651,6 +739,41 @@
         <p class="author-feature-bio">Shubhra Saxena is an IAS officer (2009 batch, Uttar Pradesh cadre), with experience across governance, healthcare, education, disaster management, and electoral administration. Her years of public service, especially through the COVID-19 pandemic, deepened her interest in psychology, philosophy, and human behaviour, interests she now explores through 'It Matters A Lot', her writing, podcast, and public conversations on self-awareness, empathy, and conscious living.</p>
         <a href="about.html" class="author-feature-link">→ Read her story</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 6: FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <p class="faq-eyebrow">FAQ</p>
+    <h2 class="faq-heading">Frequently asked questions</h2>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What is the book about?</summary>
+        <div class="faq-answer"><p><em>It Matters A Lot</em> is a work of literary nonfiction that follows a complete human life, from childhood to old age, in search of what actually forms a person. It is not a book of answers. It is an invitation back to the question: why does any of this matter?</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Who wrote the foreword?</summary>
+        <div class="faq-answer"><p>His Holiness the Dalai Lama has written the foreword to <em>It Matters A Lot</em>. It opens the book before the first chapter begins.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Who is it for?</summary>
+        <div class="faq-answer"><p><em>It Matters A Lot</em> is for everyone. The book follows a whole life, from childhood to old age, so every reader will find pages that meet them where they are. You do not need to be at any particular stage of life. You only need to have asked, at some point, why any of this matters.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Is it a self-help book?</summary>
+        <div class="faq-answer"><p>No. It offers no method, steps or checklist. Each chapter sits with a stage of life and leaves you with a question to carry, not an instruction to follow.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>How do I pre-order?</summary>
+        <div class="faq-answer"><p>Use the Pre-Order Now button on this page. It takes you to the book's listing on Amazon India.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Is there a pre-order discount?</summary>
+        <div class="faq-answer"><p>Yes. The pre-order price on Amazon is discounted. The current price is shown on the listing.</p></div>
+      </details>
     </div>
   </div>
 </section>
