@@ -358,6 +358,7 @@
     background:var(--cloud);
     border-radius:16px;overflow:hidden;
     display:flex;flex-direction:column;
+    text-decoration:none;color:inherit;
     opacity:0;transform:translateY(20px);
     transition-property:opacity, transform, box-shadow;
     transition-duration:.6s, .6s, .2s;
@@ -373,7 +374,7 @@
   }
   .talks-thumb{aspect-ratio:3/2;overflow:hidden;}
   .talks-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-  .talks-body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:10px;}
+  .talks-body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:10px;flex:1;}
   .talks-tag{
     font-family:var(--sans);font-weight:500;font-size:.7rem;
     text-transform:uppercase;letter-spacing:.14em;color:var(--marigold);
@@ -384,6 +385,18 @@
   }
   .talks-line{
     font-family:var(--sans);font-weight:400;font-size:.9rem;line-height:1.6;color:var(--ink-soft);
+  }
+  .talks-readmore{
+    font-family:var(--sans);font-weight:500;font-size:.8rem;color:var(--marigold);
+    display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:6px;
+  }
+  .talks-readmore .arrow{
+    display:inline-block;
+    transition:transform .3s cubic-bezier(.25,.1,.25,1);
+  }
+  .talks-card:hover .talks-readmore .arrow,
+  .talks-card:focus-visible .talks-readmore .arrow{
+    transform:translateX(4px);
   }
   @media (max-width:768px){
     .talks-grid{grid-template-columns:1fr;gap:20px;}
@@ -664,33 +677,35 @@
   </div>
 </section>
 
-<!-- Section 4 — Talks and Appearances -->
+<!-- Section 4 — Featured In -->
 <section class="talks">
   <div class="wrap">
-    <p class="talks-eyebrow">Talks and Appearances</p>
-    <h2 class="talks-heading">Where the ideas get spoken aloud.</h2>
-    <p class="talks-sub">Panels, dialogues, and rooms where public service and conscious living meet the people doing the work.</p>
+    <p class="talks-eyebrow">Featured In</p>
+    <h2 class="talks-heading">Where the work gets noticed.</h2>
+    <p class="talks-sub">Conversations and essays across national publications, on leadership, public service, and the questions worth sitting with.</p>
     <div class="talks-grid">
-      <article class="talks-card">
+      <a class="talks-card" href="https://www.mid-day.com/buzzfeed/article/in-conversation-with-ias-officer-and-author-shubhra-saxena-leadership-empathy-and-the-evolving-meaning-of-success-10404" target="_blank" rel="noopener noreferrer">
         <div class="talks-thumb">
           <img src="Pages/Home%20Page/Final%20Images/Talks%20Section%20Images/talk-institutional.webp" alt="Shubhra Saxena with a delegation at an international democracy institution">
         </div>
         <div class="talks-body">
-          <p class="talks-tag">Dialogue</p>
-          <p class="talks-title">Conversations Across Borders</p>
-          <p class="talks-line">A dialogue with international partners on what keeps democratic institutions standing, and the quiet, ongoing work of holding them together across countries and generations.</p>
+          <p class="talks-tag">In Conversation</p>
+          <p class="talks-title">The Evolving Meaning of Success</p>
+          <p class="talks-line">A conversation with Mid-Day on leadership, empathy, and rethinking success, from the vantage point of a career spent in public service.</p>
+          <span class="talks-readmore">Read more<span class="arrow">→</span></span>
         </div>
-      </article>
-      <article class="talks-card">
+      </a>
+      <a class="talks-card" href="https://www.hindustantimes.com/ht-insight/public-health/suicide-is-not-an-individual-failure-101790156606970-amp.html" target="_blank" rel="noopener noreferrer">
         <div class="talks-thumb">
           <img src="Pages/Home%20Page/Final%20Images/Talks%20Section%20Images/talk-training.webp" alt="Shubhra Saxena addressing a room of professionals during a training session">
         </div>
         <div class="talks-body">
-          <p class="talks-tag">Talk</p>
-          <p class="talks-title">Governance, In Practice</p>
-          <p class="talks-line">A session with professionals on the discipline behind public service, the decisions that don't make headlines, and the habits that carry a career through difficult years.</p>
+          <p class="talks-tag">Perspective</p>
+          <p class="talks-title">A Shared Responsibility</p>
+          <p class="talks-line">Writing for Hindustan Times on why suicide can't be understood as an individual's private failing, and what shifts when we see it as a collective one instead.</p>
+          <span class="talks-readmore">Read more<span class="arrow">→</span></span>
         </div>
-      </article>
+      </a>
     </div>
   </div>
 </section>
