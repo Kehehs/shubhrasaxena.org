@@ -352,9 +352,10 @@
     font-family:var(--sans);font-weight:400;font-size:.95rem;line-height:1.65;
     color:rgba(255,253,249,.65);max-width:56ch;margin-bottom:48px;
   }
-  .talks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;}
+  .talks-grid{display:flex;flex-wrap:wrap;gap:32px;}
   .talks-card{
     --stagger:0s;
+    flex:1 1 280px;max-width:340px;
     background:var(--cloud);
     border-radius:16px;overflow:hidden;
     display:flex;flex-direction:column;
@@ -367,13 +368,19 @@
   }
   .talks-card:nth-child(1){--stagger:0s;}
   .talks-card:nth-child(2){--stagger:.1s;}
+  .talks-card:nth-child(3){--stagger:.2s;}
   .talks-card.in-view{opacity:1;transform:translateY(0);}
   .talks-card:hover{box-shadow:0 8px 32px rgba(43,39,51,.10);transform:translateY(-3px);}
   @media (prefers-reduced-motion:reduce){
     .talks-card{opacity:1;transform:none;}
   }
-  .talks-thumb{aspect-ratio:3/2;overflow:hidden;}
-  .talks-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .talks-thumb{
+    aspect-ratio:11/5;overflow:hidden;box-sizing:border-box;
+    background:#fff;border-bottom:1px solid rgba(43,39,51,.08);
+    padding:16px 28px;
+  }
+  .talks-thumb img{width:100%;height:100%;object-fit:contain;display:block;}
+  .talks-thumb-abp{background:#EE2B31;}
   .talks-body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:10px;flex:1;}
   .talks-tag{
     font-family:var(--sans);font-weight:500;font-size:.7rem;
@@ -398,8 +405,9 @@
   .talks-card:focus-visible .talks-readmore .arrow{
     transform:translateX(4px);
   }
-  @media (max-width:768px){
-    .talks-grid{grid-template-columns:1fr;gap:20px;}
+  @media (max-width:640px){
+    .talks-grid{gap:20px;}
+    .talks-card{flex-basis:100%;max-width:none;}
   }
 
   /* ---------- book ---------- */
@@ -686,7 +694,7 @@
     <div class="talks-grid">
       <a class="talks-card" href="https://www.mid-day.com/buzzfeed/article/in-conversation-with-ias-officer-and-author-shubhra-saxena-leadership-empathy-and-the-evolving-meaning-of-success-10404" target="_blank" rel="noopener noreferrer">
         <div class="talks-thumb">
-          <img src="Pages/Home%20Page/Final%20Images/Talks%20Section%20Images/talk-institutional.webp" alt="Shubhra Saxena with a delegation at an international democracy institution">
+          <img src="Pages/Home%20Page/Final%20Images/Talks%20Section%20Images/mid-day-logo.webp" alt="Mid-Day logo">
         </div>
         <div class="talks-body">
           <p class="talks-tag">In Conversation</p>
@@ -697,12 +705,23 @@
       </a>
       <a class="talks-card" href="https://www.hindustantimes.com/ht-insight/public-health/suicide-is-not-an-individual-failure-101790156606970-amp.html" target="_blank" rel="noopener noreferrer">
         <div class="talks-thumb">
-          <img src="Pages/Home%20Page/Final%20Images/Talks%20Section%20Images/talk-training.webp" alt="Shubhra Saxena addressing a room of professionals during a training session">
+          <img src="Pages/Home%20Page/Final%20Images/Talks%20Section%20Images/hindustan-times-logo.webp" alt="Hindustan Times logo">
         </div>
         <div class="talks-body">
           <p class="talks-tag">Perspective</p>
           <p class="talks-title">A Shared Responsibility</p>
           <p class="talks-line">Writing for Hindustan Times on why suicide can't be understood as an individual's private failing, and what shifts when we see it as a collective one instead.</p>
+          <span class="talks-readmore">Read more<span class="arrow">→</span></span>
+        </div>
+      </a>
+      <a class="talks-card" href="https://news.abplive.com/education/opinion-suicide-is-not-about-age-why-distress-support-prevention-matter-for-students-others-1868078" target="_blank" rel="noopener noreferrer">
+        <div class="talks-thumb talks-thumb-abp">
+          <img src="Pages/Home%20Page/Final%20Images/Talks%20Section%20Images/ABP-LIVE-LOGO.webp" alt="ABP Live logo">
+        </div>
+        <div class="talks-body">
+          <p class="talks-tag">Viewpoint</p>
+          <p class="talks-title">Not Just a Student's Problem</p>
+          <p class="talks-line">An essay for ABP Live arguing that distress and the need for support don't stop at any particular age, and why prevention has to be built for everyone.</p>
           <span class="talks-readmore">Read more<span class="arrow">→</span></span>
         </div>
       </a>
