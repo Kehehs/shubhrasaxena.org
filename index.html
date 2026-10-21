@@ -506,16 +506,14 @@
     padding-right:clamp(24px,4vw,64px);
   }
   .book-cover{
-    position:relative;width:290px;height:395px;background:var(--cloud);
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 32px 80px rgba(0,0,0,.40), 0 6px 16px rgba(0,0,0,.22);
-    transform:rotate(4deg);
+    position:relative;width:350px;height:499px;background:transparent;
+    transform:none;
     transition:transform .3s cubic-bezier(.34,1.56,.64,1);
   }
-  .book-cover img{width:100%;height:100%;object-fit:cover;display:block;}
-  .book-cover-wrap:hover .book-cover{transform:translateY(-10px) rotate(2deg);}
+  .book-cover img{width:100%;height:100%;object-fit:contain;display:block;}
+  .book-cover-wrap:hover .book-cover{transform:translateY(-10px);}
   .book-cover-plate{
+    display:none;
     position:absolute;top:0;left:0;width:290px;height:395px;
     background:rgba(230,162,60,.14);
     border-radius:4px 12px 12px 4px;
@@ -538,8 +536,7 @@
   @media (max-width:768px){
     .book-grid{flex-direction:column-reverse;gap:56px;}
     .book-text,.book-cover-wrap{width:100%;}
-    .book-cover-wrap,.book-cover,.book-cover-plate{width:240px;height:328px;}
-    .book-cover{transform:rotate(2deg);}
+    .book-cover-wrap,.book-cover,.book-cover-plate{width:270px;height:385px;}
     .book-cover-plate{transform:rotate(-4deg) translate(14px,7px);}
     .book-cover-diya{width:64px;}
   }
@@ -793,7 +790,7 @@
     <div class="book-cover-wrap" role="img" aria-label="It Matters A Lot by Shubhra Saxena">
       <div class="book-cover-plate" aria-hidden="true"></div>
       <div class="book-cover">
-        <img src="Pages/Books%20Page/Images/IMAL-front-cover-web.webp?v=3" width="1519" height="2354" loading="lazy" alt="Book cover: It Matters A Lot by Shubhra Saxena">
+        <img src="Pages/Books%20Page/Images/IMAL-book-mockup.webp" width="1000" height="1425" loading="lazy" alt="Book cover: It Matters A Lot by Shubhra Saxena">
       </div>
     </div>
   </div>
