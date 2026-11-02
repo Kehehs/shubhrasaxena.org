@@ -28,30 +28,38 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": "https://www.shubhrasaxena.org/#person",
-  "name": "Shubhra Saxena",
-  "jobTitle": "IAS Officer and Author",
-  "url": "https://www.shubhrasaxena.org/",
-  "image": "https://www.shubhrasaxena.org/Pages/Home%20Page/Final%20Images/new-hero-image.webp",
-  "sameAs": [
-    "https://www.linkedin.com/in/shubhra-saxena-ias-423564218",
-    "https://www.instagram.com/shubhra.saxena_official",
-    "https://youtube.com/@itmattersalot-shubhrasaxena"
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.shubhrasaxena.org/#person",
+      "name": "Shubhra Saxena",
+      "jobTitle": "IAS Officer and Author",
+      "description": "IAS officer and author of It Matters A Lot.",
+      "url": "https://www.shubhrasaxena.org/",
+      "image": "https://www.shubhrasaxena.org/Pages/Home%20Page/Final%20Images/new-hero-image.webp",
+      "sameAs": [
+        "https://www.linkedin.com/in/shubhra-saxena-ias-423564218",
+        "https://www.instagram.com/shubhra.saxena_official",
+        "https://youtube.com/@itmattersalot-shubhrasaxena"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.shubhrasaxena.org/#website",
+      "name": "Shubhra Saxena",
+      "url": "https://www.shubhrasaxena.org/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://www.shubhrasaxena.org/#person"
+      },
+      "about": {
+        "@id": "https://www.shubhrasaxena.org/#person"
+      }
+    }
   ]
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Shubhra Saxena",
-  "url": "https://www.shubhrasaxena.org/",
-  "publisher": {
-    "@id": "https://www.shubhrasaxena.org/#person"
-  }
-}
-</script>
+
 <link rel="icon" type="image/webp" href="ss-favicon.webp">
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
